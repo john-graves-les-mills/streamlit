@@ -14,13 +14,13 @@ def run_query(query):
         cur.execute(query)
         return cur.fetchall()
 
-my_variable = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214")
+my_variable = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STAGE_SALESFORCE_STREAMLIT_TARGET")
 my_df = st.dataframe(my_variable)
 st.write(f"Connected to Snowflake with {len(my_variable)} rows")
 
                         
 if st.button("Click me"):
-  st.write("Hello world 20221214 1101")
+  st.write("Hello world 20221214 1113")
 
 my_pick = st.text_input("Pick a number:")
 if my_pick:
