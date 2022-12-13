@@ -1,4 +1,5 @@
 import streamlit as st
+import snowflake.connector
 
 def init_connection():
     return snowflake.connector.connect(
