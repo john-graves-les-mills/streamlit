@@ -21,7 +21,7 @@ st.write(f"Connected to Snowflake with {len(my_variable)} rows")
 
                         
 if st.button("Click me"):
-  st.write("Hello world 20221214 1041")
+  st.write("Hello world 20221214 1043")
 
 my_pick = st.text_input("Pick a number:")
 if my_pick:
