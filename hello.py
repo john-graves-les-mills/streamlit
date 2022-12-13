@@ -19,7 +19,7 @@ def run_query(query):
 def query(query):
     with conn.cursor() as cur:
         cur.execute(query)
-        return cur..fetch_pandas_all()
+        return cur.fetch_pandas_all()
 
 my_variable = query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214")
 my_df = st.dataframe(my_variable)
