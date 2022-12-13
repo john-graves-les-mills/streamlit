@@ -1,28 +1,21 @@
+import pandas as pd
 import streamlit as st
-import snowflake.connector
 
-def init_connection():
-    return snowflake.connector.connect(
-        **st.secrets["snowflake"], client_session_keep_alive=True
+# Cache the dataframe so it's only loaded once
+@st.experimental_memo
+def load_data():
+    return pd.DataFrame(
+        {
+            "first column": [1, 2, 3, 4],
+            "second column": [10, 20, 30, 40],
+        }
     )
-conn = init_connection()
-# Perform query.
-# Uses st.experimental_memo to only rerun when the query changes or after 10 min.
-@st.experimental_memo(ttl=600)
-def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
 
+# Boolean to resize the dataframe, stored as a session state variable
+st.checkbox("Use container width", value=False, key="use_container_width")
 
-my_variable = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214")
-my_df = st.dataframe(my_variable)
-st.write(f"Connected to Snowflake with {len(my_variable)} rows")
+df = load_data()
 
-                        
-if st.button("Click me"):
-  st.write("Hello world 20221214 1113")
-
-my_pick = st.text_input("Pick a number:")
-if my_pick:
-  st.write(f"You picked: {my_pick}")
+# Display the dataframe and allow the user to stretch the dataframe
+# across the full width of the container, based on the checkbox value
+st.dataframe(df, use_container_width=st.session_state.use_container_width)
