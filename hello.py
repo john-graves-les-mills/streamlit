@@ -14,7 +14,7 @@ def run_query(query):
         cur.execute(query)
         return cur.fetchall()
 
-my_variable = run_query("SELECT * FROM LMI_TEST.TEST.STREAMLIT_20221214")
+my_variable = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214")
 my_df = st.dataframe(my_variable)
 st.write(f"Connected to Snowflake with {len(my_variable)} rows")
 
