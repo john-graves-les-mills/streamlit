@@ -1,6 +1,5 @@
 import streamlit as st
 import snowflake.connector
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 def init_connection():
     return snowflake.connector.connect(
@@ -16,7 +15,5 @@ def run_query(query):
         return cur.fetch_pandas_all()
 
 
-my_df = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214")
-st.write(my_df.to_html())
-
-AgGrid(my_df)
+my_df = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214 LIMIT 10")
+st.dataframe(my_df)
