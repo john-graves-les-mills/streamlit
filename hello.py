@@ -1,15 +1,19 @@
 import streamlit as st
 import snowflake.connector
 
-conn_sflake = snowflake.connector.connect(
+def init_connection():
+    return snowflake.connector.connect(
         **st.secrets["snowflake"], client_session_keep_alive=True
     )
-snowflake_cursor = conn_sflake.cursor() 
-
+conn = init_connection()
 # Perform query.
+# Uses st.experimental_memo to only rerun when the query changes or after 10 min.
+@st.experimental_memo(ttl=600)
 def run_query(query):
-    query_pandas = snowflake_cursor.execute(query).fetch_pandas_all()
-    return query_pandas
+    with conn.cursor() as cur:
+        cur.execute(query)
+        return cur.fetchall()
+
 
 my_variable = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214")
 my_df = st.dataframe(my_variable)
