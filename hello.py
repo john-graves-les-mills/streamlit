@@ -1,5 +1,7 @@
 import pandas as pd
 import streamlit as st
+import snowflake.connector
+
 from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 conn_sflake = snowflake.connector.connect(
