@@ -14,5 +14,5 @@ def run_query(query):
 conn_sflake = snowflake.connector.connect(**st.secrets["snowflake"], client_session_keep_alive=True)
 snowflake_cursor = conn_sflake.cursor()   
 st.write("20221214 1555")
-query1 = run_query(f"select distinct SALESPERSON from LMI_TEST.APPFIGURES.STAGE_SALESFORCE_STREAMLIT_TARGET")
-st.write(query1)
+# query1 = run_query(f"select distinct SALESPERSON from LMI_TEST.APPFIGURES.STAGE_SALESFORCE_STREAMLIT_TARGET")
+# st.write(query1)
