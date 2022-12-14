@@ -25,7 +25,7 @@ def t(title_string, no_year=False, silent=False):
 
 conn_sflake = snowflake.connector.connect(**st.secrets["snowflake"], client_session_keep_alive=True)
 snowflake_cursor = conn_sflake.cursor()   
-st.write("20221214 1609 ")
+st.header("Year on Year Daily Acquisitions")
 df = run_query(f"SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214")
 st.write(f"Fetched {len(df)} Days of Data through {max(df.CREATED_DATE)}")
 df2021 = df[(df.CREATED_DATE >= datetime.date(2021,11,25)) & (df.CREATED_DATE <= datetime.date(2022,1,25))].copy()
