@@ -6,10 +6,9 @@ def init_connection():
         **st.secrets["snowflake"], client_session_keep_alive=True
     )
 conn = init_connection()
-
 # Perform query.
 # Uses st.experimental_memo to only rerun when the query changes or after 10 min.
-# @st.experimental_memo(ttl=600)
+@st.experimental_memo(ttl=600)
 def run_query(query):
     with conn.cursor() as cur:
         cur.execute(query)
@@ -17,8 +16,13 @@ def run_query(query):
 
 
 my_variable = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214 LIMIT 10")
-
+my_df = st.dataframe(my_variable)
 st.write(f"Connected to Snowflake with {len(my_variable)} rows")
-st.dataframe(my_variable)
 
-           
+                        
+if st.button("Click me"):
+  st.write("Hello world 20221214 1113")
+
+my_pick = st.text_input("Pick a number:")
+if my_pick:
+  st.write(f"You picked: {my_pick}")
