@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import snowflake.connector
-
+import plotly.express as px
 
 
 def run_query(query):
