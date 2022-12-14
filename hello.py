@@ -28,10 +28,10 @@ snowflake_cursor = conn_sflake.cursor()
 df = run_query(f"SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214 LIMIT 10")
 st.write(df)
 
-title = t(f"Acquisitions (N={len(df):,})")
-fig = px.bar(df, x=df.columns[0], y='ROW_COUNT', width=940)
-fig.update_layout(title=title,
-    xaxis_title='Date',
-    yaxis_title='Count') #,legend_title_text='')
+# title = t(f"Acquisitions (N={len(df):,})")
+# fig = px.bar(df, x=df.columns[0], y='ROW_COUNT', width=940)
+# fig.update_layout(title=title,
+#     xaxis_title='Date',
+#     yaxis_title='Count') #,legend_title_text='')
 
-st.plotly_chart(fig)
+# st.plotly_chart(fig)
