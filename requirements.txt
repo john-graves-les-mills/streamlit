@@ -17,4 +17,3 @@ typing_extensions==4.4.0
 urllib3==1.26.13
 snowflake-connector-python==2.8.3
 plotly==5.11.0
-tenacity==8.1.0

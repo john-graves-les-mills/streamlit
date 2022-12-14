@@ -1,6 +1,6 @@
 import datetime
 import pandas as pd
-import plotly.express as px
+# import plotly.express as px
 import snowflake.connector
 import streamlit as st
 
