@@ -1,23 +1,37 @@
+import datetime
 import pandas as pd
-import streamlit as st
+import plotly.express as px
 import snowflake.connector
+import streamlit as st
 
-def init_connection():
-    return snowflake.connector.connect(
-        **st.secrets["snowflake"], client_session_keep_alive=True
-    )
-conn = init_connection()
-# Perform query.
-# Uses st.experimental_memo to only rerun when the query changes or after 10 min.
-@st.experimental_memo(ttl=600)
+
+def t(title_string, no_year=False, silent=False):
+    """Add "as at {today}" to title. Usage: t(title_sting)
+
+    @title_string text to preceed the "as at" part
+    """
+    if no_year == False:
+        today = datetime.datetime.today().strftime('%d %b %Y')
+        title = f"{title_string} as at {today}"
+    else:
+        today = datetime.datetime.today().strftime('%d %b')
+        title = f"{title_string} - {today}"
+    return title
+
+
 def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall() # Returns a list of lists
+    query_pandas = snowflake_cursor.execute(query).fetch_pandas_all()
+    return query_pandas
 
+conn_sflake = snowflake.connector.connect(**st.secrets["snowflake"], client_session_keep_alive=True)
+snowflake_cursor = conn_sflake.cursor()   
+df = run_query(f"SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214 LIMIT 10")
+st.write(df)
 
-data = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214 LIMIT 10")
-df = pd.DataFrame(data)
-st.write(f"Connected to Snowflake with {len(df)} rows")
-df.columns = ['CREATED_DATE','ROW_COUNT','VIMEO_ID_COUNT']
-st.dataframe(df)
+title = t(f"Acquisitions (N={len(df):,})")
+fig = px.bar(df, x=df.columns[0], y='ROW_COUNT', width=940)
+fig.update_layout(title=title,
+    xaxis_title='Date',
+    yaxis_title='Count') #,legend_title_text='')
+
+st.plotly_chart(fig)
