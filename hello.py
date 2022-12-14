@@ -1,3 +1,4 @@
+import pandas as pd
 import streamlit as st
 import snowflake.connector
 
@@ -12,7 +13,7 @@ conn = init_connection()
 def run_query(query):
     with conn.cursor() as cur:
         cur.execute(query)
-        return cur.fetchall() # Returns a list of lists
+        return cur.fetch_pandas_all() # Returns a list of lists
 
 
 df = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214 LIMIT 10")
