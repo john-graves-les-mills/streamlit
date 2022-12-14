@@ -18,3 +18,5 @@ def run_query(query):
 df = run_query("SELECT * FROM LMI_TEST.APPFIGURES.STREAMLIT_20221214 LIMIT 10")
 st.write(f"Connected to Snowflake with {len(df)} rows")
 # st.write(str(df.columns)) # AttributeError: 'list' object has no attribute 'columns'
+
+st.dataframe(df)
