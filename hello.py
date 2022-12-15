@@ -70,7 +70,7 @@ df2021 = df1[(df1.CREATED_DATE >= datetime.date(2021,11,25)) &
             (df1.TIER == 'TIER#premium')].copy()
 df2021.rename(columns={'ROW_COUNT':'2021'}, inplace=True)
 
-# 2022
+# 2022 
 df2022 = df1[(df1.CREATED_DATE >= datetime.date(2022,11,25)) & (df1.CREATED_DATE <= datetime.date(2023,1,25))].copy()
 # datetime.date(2022,11,29) - datetime.date(2021,11,30) # 364 days
 df2022['CREATED_DATE'] = df2022['CREATED_DATE'] - datetime.timedelta(days=364)
