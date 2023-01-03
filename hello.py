@@ -26,7 +26,7 @@ def t(title_string, no_year=False, silent=False):
 conn_sflake = snowflake.connector.connect(**st.secrets["snowflake"], client_session_keep_alive=True)
 snowflake_cursor = conn_sflake.cursor()   
 
-df2022c = run_query(f"""SELECT * FROM LMI_TEST.APPFIGURES.IAP_SIGNUPS_20221219""")
+df2022c = run_query(f"""SELECT * FROM LMI_TEST.APPFIGURES.IAP_SIGNUPS_20230104""")
 
 st.header("Year on Year Daily Acquisitions")
 df = run_query(f"""SELECT * FROM LMI_TEST.APPFIGURES.DAILY_ACQUISITIONS_20221216""")
