@@ -70,7 +70,7 @@ st.subheader(f"LM+ RETAIL Acquisitions 2021 v 2022 (to {max(df1.CREATED_DATE)})"
 
 # 2021
 df2021 = df1[(df1.CREATED_DATE >= datetime.date(2021,11,25)) & 
-            (df1.CREATED_DATE <= datetime.date(2022,2,28)) &
+            (df1.CREATED_DATE <= datetime.date(2022,4,1)) &
             (df1.TIER == 'TIER#premium')].copy()
 df2021.rename(columns={'ROW_COUNT':'2021'}, inplace=True)
 
