@@ -39,13 +39,13 @@ st.write(f"[1] In App Purchase reporting is up to 3 days delayed")
 
 # 2021
 df2021 = df1[(df1.CREATED_DATE >= datetime.date(2021,11,25)) & 
-            (df1.CREATED_DATE <= datetime.date(2022,2,28)) &
+            (df1.CREATED_DATE <= datetime.date(2022,4,1)) &
             (df1.TIER == 'TIER#premium')].copy()
 df2021.rename(columns={'ROW_COUNT':'2021'}, inplace=True)
 
 # 2022
 df1b = pd.concat([df1, df2022c])
-df2022 = df1b[(df1b.CREATED_DATE >= datetime.date(2022,11,25)) & (df1b.CREATED_DATE <= datetime.date(2023,2,28))].copy()
+df2022 = df1b[(df1b.CREATED_DATE >= datetime.date(2022,11,25)) & (df1b.CREATED_DATE <= datetime.date(2023,4,1))].copy()
 # datetime.date(2022,11,29) - datetime.date(2021,11,30) # 364 days
 df2022['CREATED_DATE'] = df2022['CREATED_DATE'] - datetime.timedelta(days=364)
 df2022b = df2022.pivot(index='CREATED_DATE' , columns='TIER' , values='ROW_COUNT')
