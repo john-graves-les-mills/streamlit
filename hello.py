@@ -76,7 +76,7 @@ df2021.rename(columns={'ROW_COUNT':'2021'}, inplace=True)
 
 # 2022 
 df1b = pd.concat([df1, df2022c])
-df2022 = df1b[(df1b.CREATED_DATE >= datetime.date(2022,11,25)) & (df1b.CREATED_DATE <= datetime.date(2023,2,28))].copy()
+df2022 = df1b[(df1b.CREATED_DATE >= datetime.date(2022,11,25)) & (df1b.CREATED_DATE <= datetime.date(2023,4,1))].copy()
 # datetime.date(2022,11,29) - datetime.date(2021,11,30) # 364 days
 df2022['CREATED_DATE'] = df2022['CREATED_DATE'] - datetime.timedelta(days=364)
 df2022b = df2022.pivot(index='CREATED_DATE' , columns='TIER' , values='ROW_COUNT')
@@ -94,4 +94,4 @@ fig.update_layout(xaxis_title='Created Date (minus 1 year for 2022)',
                   barmode='group')
 st.plotly_chart(fig,  use_container_width=True)
 
-# 20230227 0907 
+# 20230302 0845 
